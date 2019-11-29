@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  notifier:
+    build:
+      context: .
+    volumes:
+      - ./:/code
+    environment:
+      - TOKEN
+      - CHART_ID
+      - HOST
+      - AUTH
+    restart: always
+    command: python main.py
