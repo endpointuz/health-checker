@@ -1,5 +1,6 @@
 import requests
 import time
+import datetime
 import logging
 import os
 
@@ -29,7 +30,7 @@ while True:
             }
         )
         data = response.json()
-
+        print(datetime.datetime.now(), ": ", data)
         for key, item in data.items():
             if not item['status']:
                 bot.send_message(
@@ -42,6 +43,7 @@ while True:
                 )
 
     except Exception as e:
+        print(datetime.datetime.now(), ": ", e)
         logger.exception(e)
         bot.send_message(
             chat,
