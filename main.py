@@ -19,10 +19,13 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
+logger.info('Start work')
+
 bot = telebot.TeleBot(token)
 
 while True:
     try:
+        logger.info('Send request')
         response = requests.get(
             host,
             headers={
@@ -30,7 +33,7 @@ while True:
             }
         )
         data = response.json()
-        print(datetime.datetime.now(), ": ", data)
+        logger.info(data)
         for key, item in data.items():
             if not item['status']:
                 bot.send_message(
@@ -43,7 +46,6 @@ while True:
                 )
 
     except Exception as e:
-        print(datetime.datetime.now(), ": ", e)
         logger.exception(e)
         bot.send_message(
             chat,
